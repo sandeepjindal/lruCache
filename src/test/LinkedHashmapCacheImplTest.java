@@ -3,17 +3,20 @@ package test;
 import main.com.dumdum.LRUCacheImpl;
 import main.com.dumdum.LinkedHashMapLRUCache;
 import org.junit.Test;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
-import static org.junit.Assert.*;
 
-public class LRUCacheImplTest {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+public class LinkedHashmapCacheImplTest {
 
     @Test
     public void addSomeDataToCache_WhenGetData_ThenIsEqualWithCacheElement() {
-        LRUCacheImpl<String, String> lRUCacheImpl = new LRUCacheImpl<>(3);
+        LinkedHashMapLRUCache<String, String> lRUCacheImpl = new LinkedHashMapLRUCache<>(3);
         lRUCacheImpl.set("1", "test1");
         lRUCacheImpl.set("2", "test2");
         lRUCacheImpl.set("3", "test3");
@@ -24,7 +27,7 @@ public class LRUCacheImplTest {
 
     @Test
     public void addDataToCacheToTheNumberOfSize_WhenAddOneMoreData_ThenLeastRecentlyDataWillEvict() {
-        LRUCacheImpl<String, String> lruCache = new LRUCacheImpl<>(3);
+        LinkedHashMapLRUCache<String, String> lruCache = new LinkedHashMapLRUCache<>(3);
         lruCache.set("1", "test1");
         lruCache.set("2", "test2");
         lruCache.set("3", "test3");
@@ -36,7 +39,7 @@ public class LRUCacheImplTest {
     public void runMultiThreadTask_WhenPutDataInConcurrentToCache_ThenNoDataLost() throws Exception {
         final int size = 50;
         final ExecutorService executorService = Executors.newFixedThreadPool(5);
-        LRUCacheImpl<Integer, String> cache = new LRUCacheImpl<>(size);
+        LinkedHashMapLRUCache<Integer, String> cache = new LinkedHashMapLRUCache<>(size);
         CountDownLatch countDownLatch = new CountDownLatch(size);
         try {
             IntStream.range(0, size).<Runnable>mapToObj(key -> () -> {
