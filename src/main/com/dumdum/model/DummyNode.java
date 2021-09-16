@@ -17,7 +17,7 @@ public class DummyNode<V> implements LinkedListNode<V> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     @Override

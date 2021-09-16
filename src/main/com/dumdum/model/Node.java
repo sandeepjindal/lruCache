@@ -12,7 +12,7 @@ public class Node<V> implements LinkedListNode<V> {
 
     private LinkedListNode<V> next;
 
-    public Node(V value, DoublyLinkedList<V> list, LinkedListNode<V> next) {
+    public Node(V value, LinkedListNode<V> next, DoublyLinkedList<V> list) {
         this.value = value;
         this.list = list;
         this.setPrev(next.getPrev());

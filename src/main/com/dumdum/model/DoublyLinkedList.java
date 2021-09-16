@@ -71,7 +71,7 @@ public class DoublyLinkedList<V> {
     public LinkedListNode<V> add(V value) {
         this.lock.writeLock().lock();
         try {
-            head = new Node<V>(value,this,head);
+            head = new Node<V>(value,head,this);
             if(tail.isEmpty()){
                 tail = head;
             }
