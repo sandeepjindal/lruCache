@@ -1,6 +1,6 @@
-package main.interfaces;
+package main.com.dumdum.interfaces;
 
-import main.model.DoublyLinkedList;
+import main.com.dumdum.model.DoublyLinkedList;
 
 public interface LinkedListNode<V> {
 

@@ -1,6 +1,6 @@
-package main.model;
+package main.com.dumdum.model;
 
-import main.interfaces.LinkedListNode;
+import main.com.dumdum.interfaces.LinkedListNode;
 
 public class DummyNode<V> implements LinkedListNode<V> {
 

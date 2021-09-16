@@ -1,6 +1,6 @@
-package main;
+package main.com.dumdum;
 
-import main.interfaces.Cache;
+import main.com.dumdum.interfaces.Cache;
 
 import java.util.HashMap;
 import java.util.Map;

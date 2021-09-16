@@ -1,4 +1,4 @@
-package main.interfaces;
+package main.com.dumdum.interfaces;
 
 import java.util.Optional;
 

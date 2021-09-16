@@ -1,9 +1,9 @@
-package main;
+package main.com.dumdum;
 
-import main.interfaces.Cache;
-import main.interfaces.LinkedListNode;
-import main.model.CacheElement;
-import main.model.DoublyLinkedList;
+import main.com.dumdum.interfaces.Cache;
+import main.com.dumdum.interfaces.LinkedListNode;
+import main.com.dumdum.model.CacheElement;
+import main.com.dumdum.model.DoublyLinkedList;
 
 import java.util.Map;
 import java.util.Optional;

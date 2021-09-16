@@ -1,4 +1,4 @@
-package main.model;
+package main.com.dumdum.model;
 
 public class CacheElement<K, V> {
     private K key;

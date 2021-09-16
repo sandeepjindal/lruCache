@@ -1,6 +1,6 @@
 package test;
 
-import main.LRUCacheImpl;
+import main.com.dumdum.LRUCacheImpl;
 import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

@@ -1,5 +1,5 @@
-import main.BasicCacheImpl;
-import main.LRUCacheImpl;
+import main.com.dumdum.BasicCacheImpl;
+import main.com.dumdum.LRUCacheImpl;
 
 public class Main {
 

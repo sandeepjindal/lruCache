@@ -1,6 +1,6 @@
 package test;
 
-import main.BasicCacheImpl;
+import main.com.dumdum.BasicCacheImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
