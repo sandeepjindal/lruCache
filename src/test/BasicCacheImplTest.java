@@ -13,9 +13,9 @@ public class BasicCacheImplTest {
 
         BasicCacheImpl cache = new BasicCacheImpl();
 
-        cache.setKey("1","val1");
+        cache.set("1","val1");
 
-        assertEquals("val1", cache.getKey("1").orElse("not present"));
+        assertEquals("val1", cache.get("1").orElse("not present"));
 
     }
 
@@ -25,9 +25,9 @@ public class BasicCacheImplTest {
 
         BasicCacheImpl cache = new BasicCacheImpl();
 
-        cache.setKey("1","val1");
+        cache.set("1","val1");
 
-        assertEquals(false, cache.setKey("1","val1"));
+        assertEquals(false, cache.set("1","val1"));
 
     }
 
@@ -36,9 +36,9 @@ public class BasicCacheImplTest {
 
         BasicCacheImpl cache = new BasicCacheImpl();
 
-        cache.setKey("1","val1");
+        cache.set("1","val1");
 
-        assertEquals("not present", cache.getKey("2").orElse("not present"));
+        assertEquals("not present", cache.get("2").orElse("not present"));
 
     }
 }

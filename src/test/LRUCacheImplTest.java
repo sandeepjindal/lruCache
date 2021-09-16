@@ -13,22 +13,22 @@ public class LRUCacheImplTest {
     @Test
     public void addSomeDataToCache_WhenGetData_ThenIsEqualWithCacheElement() {
         LRUCacheImpl<String, String> lRUCacheImpl = new LRUCacheImpl<>(3);
-        lRUCacheImpl.setKey("1", "test1");
-        lRUCacheImpl.setKey("2", "test2");
-        lRUCacheImpl.setKey("3", "test3");
-        assertEquals("test1", lRUCacheImpl.getKey("1").get());
-        assertEquals("test2", lRUCacheImpl.getKey("2").get());
-        assertEquals("test3", lRUCacheImpl.getKey("3").get());
+        lRUCacheImpl.set("1", "test1");
+        lRUCacheImpl.set("2", "test2");
+        lRUCacheImpl.set("3", "test3");
+        assertEquals("test1", lRUCacheImpl.get("1").get());
+        assertEquals("test2", lRUCacheImpl.get("2").get());
+        assertEquals("test3", lRUCacheImpl.get("3").get());
     }
 
     @Test
     public void addDataToCacheToTheNumberOfSize_WhenAddOneMoreData_ThenLeastRecentlyDataWillEvict() {
         LRUCacheImpl<String, String> LRUCacheImpl = new LRUCacheImpl<>(3);
-        LRUCacheImpl.setKey("1", "test1");
-        LRUCacheImpl.setKey("2", "test2");
-        LRUCacheImpl.setKey("3", "test3");
-        LRUCacheImpl.setKey("4", "test4");
-        assertFalse(LRUCacheImpl.getKey("1").isPresent());
+        LRUCacheImpl.set("1", "test1");
+        LRUCacheImpl.set("2", "test2");
+        LRUCacheImpl.set("3", "test3");
+        LRUCacheImpl.set("4", "test4");
+        assertFalse(LRUCacheImpl.get("1").isPresent());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class LRUCacheImplTest {
         CountDownLatch countDownLatch = new CountDownLatch(size);
         try {
             IntStream.range(0, size).<Runnable>mapToObj(key -> () -> {
-                cache.setKey(key, "value" + key);
+                cache.set(key, "value" + key);
                 countDownLatch.countDown();
             }).forEach(executorService::submit);
             countDownLatch.await();
@@ -47,6 +47,6 @@ public class LRUCacheImplTest {
             executorService.shutdown();
         }
         assertEquals(cache.size(), size);
-        IntStream.range(0, size).forEach(i -> assertEquals("value" + i, cache.getKey(i).get()));
+        IntStream.range(0, size).forEach(i -> assertEquals("value" + i, cache.get(i).get()));
     }
 }

@@ -11,7 +11,7 @@ public class BasicCacheImpl<K,V> implements Cache<K,V> {
     private Map<K,V> cache = new HashMap<>();
 
     @Override
-    public boolean setKey(K key, V value) {
+    public boolean set(K key, V value) {
         return !Optional.ofNullable(cache.put(key, value)).isPresent();
     }
 
@@ -32,7 +32,7 @@ public class BasicCacheImpl<K,V> implements Cache<K,V> {
 
 
     @Override
-    public Optional<V> getKey(K key) {
+    public Optional<V> get(K key) {
         return Optional.ofNullable(cache.get(key));
     }
 

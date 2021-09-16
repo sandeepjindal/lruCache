@@ -1,10 +1,9 @@
 package main.com.dumdum;
 
 import main.com.dumdum.interfaces.Cache;
-import main.com.dumdum.interfaces.LinkedListNode;
 import main.com.dumdum.model.CacheElement;
-import main.com.dumdum.model.DoublyLinkedList;
 
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,28 +13,31 @@ public class LRUCacheImpl<K, V> implements Cache<K, V> {
 
     private int size;
 
-    private Map<K, LinkedListNode<CacheElement<K,V>>> llNodeMap;
+    private Map<K, CacheElement<K,V>> llNodeMap;
 //
-    private DoublyLinkedList<CacheElement<K, V>> doublyLL;
+    private LinkedList<CacheElement<K, V>> doublyLL;
 
     private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     public LRUCacheImpl(int size) {
         this.size = size;
-        this.doublyLL = new DoublyLinkedList<CacheElement<K, V>>();
+        this.doublyLL = new LinkedList<>();
         this.llNodeMap = new ConcurrentHashMap<>(size);
     }
 
     @Override
-    public Optional<V> getKey(K key) {
+    public Optional<V> get(K key) {
         this.lock.readLock().lock();
         try{
-            LinkedListNode<CacheElement<K, V>> llNode = this.llNodeMap.get(key);
-            if(llNode == null || llNode.isEmpty()){
+            CacheElement<K, V> llNode = this.llNodeMap.get(key);
+            if(llNode == null){
                 return Optional.empty();
             } else{
-                llNodeMap.put(key,this.doublyLL.moveToFront(llNode));
-                return Optional.of(llNode.getElement().getValue());
+                this.doublyLL.remove(llNode);
+                this.doublyLL.addFirst(llNode);
+                CacheElement<K,V> element = this.doublyLL.getFirst();
+                llNodeMap.put(key,element);
+                return Optional.of(llNode.getValue());
             }
         } finally {
             this.lock.readLock().unlock();
@@ -43,22 +45,25 @@ public class LRUCacheImpl<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public boolean setKey(K key, V value) {
+    public boolean set(K key, V value) {
         this.lock.writeLock().lock();
         try{
             CacheElement<K, V> item = new CacheElement<>(key, value);
-            LinkedListNode<CacheElement<K, V>> newLLNode;
+            CacheElement<K, V> newLLNode;
             if(this.llNodeMap.containsKey(key)){
-                newLLNode = this.doublyLL.updateAndMoveToFront(this.llNodeMap.get(key),item);
+                this.doublyLL.remove(llNodeMap.get(key));
+                this.doublyLL.addFirst(item);
+                newLLNode = this.doublyLL.getFirst();
             } else {
                 if (this.size() >= this.size) {
                    this.evictElement();
                 }
-                newLLNode = this.doublyLL.add(item);
+                this.doublyLL.addFirst(item);
+                newLLNode = this.doublyLL.getFirst();
             }
-            if(newLLNode.isEmpty()){
-                return false;
-            }
+//            if(newLLNode.isEmpty()){
+//                return false;
+//            }
             this.llNodeMap.put(key,newLLNode);
             return true;
         } finally {
@@ -95,11 +100,8 @@ public class LRUCacheImpl<K, V> implements Cache<K, V> {
     private boolean evictElement() {
         this.lock.writeLock().lock();
         try {
-            LinkedListNode<CacheElement<K, V>> linkedListNode = doublyLL.removeTail();
-            if (linkedListNode.isEmpty()) {
-                return false;
-            }
-            llNodeMap.remove(linkedListNode.getElement().getKey());
+            CacheElement<K, V> element = doublyLL.removeLast();
+            llNodeMap.remove(element.getKey());
             return true;
         } finally {
             this.lock.writeLock().unlock();
