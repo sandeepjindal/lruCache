@@ -1,6 +1,6 @@
-package com.company.src.main;
+package main;
 
-import com.company.src.main.interfaces.Cache;
+import main.interfaces.Cache;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.company.src.main.model;
+package main.model;
 
 public class CacheElement<K, V> {
     private K key;

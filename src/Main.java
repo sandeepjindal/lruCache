@@ -1,7 +1,5 @@
-package com.company;
-
-import com.company.src.main.BasicCacheImpl;
-import com.company.src.main.LRUCacheImpl;
+import main.BasicCacheImpl;
+import main.LRUCacheImpl;
 
 public class Main {
 

@@ -1,6 +1,6 @@
-package com.company.src.test;
+package test;
 
-import com.company.src.main.BasicCacheImpl;
+import main.BasicCacheImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

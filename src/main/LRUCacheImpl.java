@@ -1,11 +1,10 @@
-package com.company.src.main;
+package main;
 
-import com.company.src.main.interfaces.Cache;
-import com.company.src.main.interfaces.LinkedListNode;
-import com.company.src.main.model.CacheElement;
-import com.company.src.main.model.DoublyLinkedList;
+import main.interfaces.Cache;
+import main.interfaces.LinkedListNode;
+import main.model.CacheElement;
+import main.model.DoublyLinkedList;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;

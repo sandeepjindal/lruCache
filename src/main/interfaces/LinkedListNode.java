@@ -1,6 +1,6 @@
-package com.company.src.main.interfaces;
+package main.interfaces;
 
-import com.company.src.main.model.DoublyLinkedList;
+import main.model.DoublyLinkedList;
 
 public interface LinkedListNode<V> {
 

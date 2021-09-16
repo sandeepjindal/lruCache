@@ -1,6 +1,6 @@
-package com.company.src.main.model;
+package main.model;
 
-import com.company.src.main.interfaces.LinkedListNode;
+import main.interfaces.LinkedListNode;
 
 public class Node<V> implements LinkedListNode<V> {
 

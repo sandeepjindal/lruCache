@@ -1,4 +1,4 @@
-package com.company.src.main.interfaces;
+package main.interfaces;
 
 import java.util.Optional;
 
